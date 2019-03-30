@@ -7,7 +7,7 @@
 <body>
 <content tag="nav">
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application Status <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">下拉菜单的题目<span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
             <li class="dropdown-item"><a href="#">App profile: ${grailsApplication.config.grails?.profile}</a></li>
@@ -51,7 +51,7 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Welcome to Grails</h1>
+        <h1>这里是主显示区</h1>
 
         <p>
             Congratulations, you have successfully started your first Grails application! At the moment
@@ -61,7 +61,7 @@
         </p>
 
         <div id="controllers" role="navigation">
-            <h2>Available Controllers:</h2>
+            <h2>控制器列表:</h2>
             <ul>
                 <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
                     <li class="controller">

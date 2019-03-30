@@ -17,21 +17,26 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
+    <!--这是左边的图标，固定内容-->
     <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- 这是右边的菜单，几个按钮，点击后下来菜单-->
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
+            <!-- 这一句指导页面将内容插入到这里 -->
             <g:pageProperty name="page.nav"/>
         </ul>
     </div>
 
 </nav>
 
+<!-- 这是现实的主体部分 -->
 <g:layoutBody/>
 
+<!-- 这里是也叫部分 -->
 <div class="footer row" role="contentinfo">
     <div class="col">
         <a href="http://guides.grails.org" target="_blank">
