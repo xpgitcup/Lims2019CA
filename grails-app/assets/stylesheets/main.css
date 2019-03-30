@@ -262,6 +262,11 @@ textarea {
     vertical-align: top;
 }
 
+/* 李晓平增加 20190303*/
+input[type=file] {
+    display: inline;
+}
+
 input[type=checkbox], input[type=radio] {
     background-color: transparent;
     border: 0;
@@ -469,9 +474,9 @@ th:hover, tr:hover {
     background: #f5f5f5;
 }
 
-/* PAGINATION */
+/* PAGINATION 改名 李晓平 20190330*/
 
-.pagination {
+.paginationGrails {
     border-top: 0;
     margin: 0.8em 1em 0.3em;
     padding: 0.3em 0.2em;
@@ -482,8 +487,8 @@ th:hover, tr:hover {
     background-color: #EFEFEF;
 }
 
-.pagination a,
-.pagination .currentStep {
+.paginationGrails a,
+.paginationGrails .currentStep {
     color: #666666;
     display: inline-block;
     margin: 0 0.1em;
@@ -494,16 +499,16 @@ th:hover, tr:hover {
     border-radius: 0.3em;
 }
 
-.pagination a:hover, .pagination a:focus,
-.pagination .currentStep {
+.paginationGrails a:hover, .paginationGrails a:focus,
+.paginationGrails .currentStep {
     background-color: #999999;
     color: #ffffff;
     outline: none;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
-.no-borderradius .pagination a:hover, .no-borderradius .pagination a:focus,
-.no-borderradius .pagination .currentStep {
+.no-borderradius .paginationGrails a:hover, .no-borderradius .paginationGrails a:focus,
+.no-borderradius .paginationGrails .currentStep {
     background-color: transparent;
     color: #444444;
     text-decoration: underline;

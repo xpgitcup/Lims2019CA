@@ -4667,7 +4667,7 @@ input[type="button"].btn-block {
   color: #6c757d;
 }
 
-.pagination {
+.paginationGrails {
   display: -ms-flexbox;
   display: flex;
   padding-left: 0;
