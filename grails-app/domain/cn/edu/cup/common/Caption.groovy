@@ -4,6 +4,7 @@ class Caption {
 
     String name
     String logo
+    String description
 
     static constraints = {
     }
