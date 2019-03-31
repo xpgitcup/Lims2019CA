@@ -1,6 +1,6 @@
-package cn.edu.cup.init
+package cn.edu.cup.chuyun.init
 
-import com.alibaba.fastjson.JSON
+import cn.edu.cup.common.Caption
 import grails.gorm.transactions.Transactional
 
 import javax.servlet.ServletContext
@@ -11,6 +11,7 @@ class InitService {
     def grailsApplication
     def dataSource
     def systemMenuService
+    def captionService
     def commonService
 
     /**
@@ -23,44 +24,36 @@ class InitService {
     }
 
     /*
-    * 从json文件中导入菜单
-    * */
-
-    def importFromJsonFile(fileName) {
-        def jsonFile = new File(fileName)
-        if (jsonFile.exists()) {
-            def json = jsonFile.text
-            def menus = commonService.importFromJson4Tree(json, SystemMenu.class, "menuItems")
-            println("导入：${menus}")
-            menus.each { e ->
-                systemMenuService.save(e)
-            }
-        }
-    }
-
-    /*
     * 处理ocnfig.json文件
     * */
 
     private void processConfigFile(ServletContext servletContext) {
         def webRootDir = servletContext.getRealPath("/")
-        def configFileName = "${webRootDir}/config/scriptConfig.json"
-        def configFile = new File(configFileName)
-        def config = [:]
-        if (configFile.exists()) {
-            config = com.alibaba.fastjson.JSON.parse(configFile.text)
-            if (config.scripts) {
-                println("脚本文件：" + config.scripts)
-                config.scripts.each { e ->
-                    loadScripts("${webRootDir}${e}")
-                }
+
+        // 先处理数据库脚本文件
+        def configFileName = "${webRootDir}/config/scriptList.json"
+        def scriptList = [:]
+        scriptList = commonService.importObjectListFromJsonFileName(configFileName, scriptList.getClass())
+        println("处理脚本：${scriptList}")
+        scriptList.each { e ->
+            switch (e.key) {
+                case "dir":
+                    loadScripts(e.value)
+                    break
+                case "file":
+                    def sfile = new File(e.value)
+                    executeScript(sfile)
+                    break
             }
-        } else {
-            config.put("scripts", ["脚本1", "脚本2"])
-            def printWriter = new PrintWriter(configFile, "utf-8")
-            printWriter.write(JSON.toJSONString(config))
-            printWriter.close()
-            println("创建配置文件。")
+        }
+
+        // 处理应用程序名称、图标等信息
+        def captionsFileName = "${webRootDir}/config/captions.json"
+        if (captionService.count()<1) {
+            def captions = commonService.importObjectListFromJsonFileName(captionsFileName, Caption.class)
+            captions.each { e->
+                captionService.save(e)
+            }
         }
     }
 

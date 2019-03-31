@@ -57,14 +57,14 @@
         %{--标题--}%
         <span class="navbar-header">
             <a href="${createLink(uri: '/')}">
-                <asset:image src="cn/edu/cup/${cn.edu.cup.system.SystemTitle.last()?.applicationLogo}"
+                <asset:image src="cn/edu/cup/${cn.edu.cup.common.Caption.findByName("main")?.logo}"
                              class="img-rounded"/>
             </a>
         </span>
         <span class="applicationTitle">
-            <g:if test="${cn.edu.cup.system.SystemTitle.last()}">
+            <g:if test="${cn.edu.cup.common.Caption.findByName("main")?.title}">
                 <a href="${createLink(uri: '/home')}">
-                    ${cn.edu.cup.system.SystemTitle.last()?.applicationTitle}
+                    ${cn.edu.cup.common.Caption.findByName("main")?.title}
                 </a>
             </g:if>
             <g:else>

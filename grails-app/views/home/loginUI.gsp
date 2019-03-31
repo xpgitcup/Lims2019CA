@@ -16,7 +16,7 @@
 <body>
 <div class="welcomePanel">
     <div class="title">
-        ${cn.edu.cup.system.SystemTitle.last()?.applicationTitle}
+        ${cn.edu.cup.common.Caption.findByName("main")?.title}
     </div>
 
     <form controller="home" action="login" method="post">

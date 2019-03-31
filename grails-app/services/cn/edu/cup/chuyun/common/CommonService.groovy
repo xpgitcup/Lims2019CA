@@ -1,4 +1,4 @@
-package cn.edu.cup.common
+package cn.edu.cup.chuyun.common
 
 import grails.util.Environment
 import org.grails.web.util.WebUtils
@@ -12,10 +12,36 @@ class CommonService {
     def webRootPath = ""        // 公用的变量---赋值是在BootStrap中
 
     /*
-     * 从json字符串中导入对象列表
-     * */
+    从json文件中导入对象列表，文件如果不存在，创建文件
+    * */
 
-    def importFromJson(String jsonString, Class clazz) {
+    def importObjectListFromJsonFileName(String jsonFileName, Class clazz) {
+        def jsonFile = new File(jsonFileName)
+        return importObjectListFromJsonFile(jsonFile, clazz)
+    }
+
+    /*
+    从json文件中导入对象列表，文件如果不存在，创建文件
+    * */
+
+    def importObjectListFromJsonFile(File jsonFile, Class clazz) {
+        if (jsonFile.exists()) {
+            def jsonString = jsonFile.text
+            return importObjectListFromJson(jsonString, clazz)
+        } else {
+            def printWriter = new PrintWriter(jsonFile, "utf-8")
+            def string = com.alibaba.fastjson.JSON.toJSONString(clazz.newInstance())
+            printWriter.write(string)
+            printWriter.close()
+            return null
+        }
+    }
+
+    /*
+    * 从json字符串中导入对象列表
+    * */
+
+    def importObjectListFromJson(String jsonString, Class clazz) {
         def jsonList = com.alibaba.fastjson.JSON.parse(jsonString)
         def objectList = []
         jsonList.each { e ->
@@ -32,7 +58,32 @@ class CommonService {
      * 从json字符串中导入树形结构的对象列表
      * */
 
-    def importFromJson4Tree(String jsonString, Class clazz, String subItemsString) {
+    def importTreeFromJsonFileName(String jsonFileName, Class clazz, String subItemsString) {
+        def jsonFile = new File(jsonFileName)
+        return importTreeFromJsonFile(jsonFile, clazz, subItemsString)
+    }
+
+    /*
+     * 从json字符串中导入树形结构的对象列表
+     * */
+
+    def importTreeFromJsonFile(File jsonFile, Class clazz, String subItemsString) {
+        if (jsonFile.exists()) {
+            def jsonString = jsonFile.text
+            return importTreeFromJson(jsonString, clazz, subItemsString)
+        } else {
+            def printWriter = new PrintWriter(jsonFile, "utf-8")
+            printWriter.write(com.alibaba.fastjson.JSON.toJSONString(clazz.newInstance()))
+            printWriter.close()
+            return null
+        }
+    }
+
+    /*
+     * 从json字符串中导入树形结构的对象列表
+     * */
+
+    def importTreeFromJson(String jsonString, Class clazz, String subItemsString) {
         def jsonList = com.alibaba.fastjson.JSON.parse(jsonString)
         def objectList = []
         jsonList.each { e ->
@@ -43,7 +94,7 @@ class CommonService {
             //子元素的导入
             def items = e.getAt(subItemsString)
             def subList = []
-            items.each { se->
+            items.each { se ->
                 def newSubItem = clazz.newInstance()
                 importItem4Tree(newSubItem, se, subItemsString)
                 subList.add(newSubItem)
@@ -84,6 +135,10 @@ class CommonService {
         println("${grailsApplication}")
         return grailsApplication.metadata.getApplicationName()
     }
+
+    /*
+    增加双引号
+    * */
 
     List getQuotationList(list) {
         def tmp = []

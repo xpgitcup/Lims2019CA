@@ -1,5 +1,6 @@
 package cn.edu.cup.common
 
+import cn.edu.cup.chuyun.common.CommonService
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
