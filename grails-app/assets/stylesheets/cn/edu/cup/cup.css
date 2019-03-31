@@ -4,6 +4,7 @@ body {
   background-size: cover;
   /*这个是正确的*/
   /*登录界面的设置*/
+  /*输入界面--文件上传*/
 }
 body .carousel-inner .item img {
   display: block;
@@ -15,13 +16,16 @@ body .carousel-inner .item img {
 body .topoCanvas {
   background-color: #0000FF;
 }
+body .applicationHeaderStatus {
+  color: white;
+}
 body .applicationTitle {
   display: inline-block;
   vertical-align: text-top;
-  padding-top: 20px;
+  padding-top: 0px;
 }
 body .applicationTitle a {
-  font-size: 2.1em;
+  font-size: 3.1em;
   color: white;
 }
 body .home-message {
@@ -63,7 +67,7 @@ body .welcomePanel .title {
 }
 body .welcomePanel .welcomeForm {
   font-family: "微软雅黑";
-  font-size: 1.0em;
+  font-size: 1em;
   margin-left: 140px;
   margin-top: 35px;
 }
@@ -74,3 +78,8 @@ body .welcomePanel .welcomeForm ul li {
 body .welcomePanel .welcomeForm ul li a {
   color: white;
 }
+body .fileInput {
+  clear: right;
+  float: left;
+}
+/*# sourceMappingURL=cup.css.map */
